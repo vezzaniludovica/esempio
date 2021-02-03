@@ -57,3 +57,24 @@ app.put("/lista-parole-b",(req,res)=>{
 app.listen(8080, () => console.log("server listening on port 8080"))
 
 
+const express= require("express");
+const bodyParser = require("body-parser")
+const fetch= require("node-fetch")
+
+const app= new express();
+app.use(bodyParser.json())
+app.post("/comments",(req,res)=>{
+    const a= req.body.id;
+    fetch(`https://jsonplaceholder.typicode.com/posts/${a}/comments`)
+        .then(response=>response.json())
+        .then(data=>{res.json({count:data[0].body.split(" ").length})
+
+        })
+})
+
+ 
+
+
+app.listen(8080, () => console.log("server listening on port 8080"))
+
+
